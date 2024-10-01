@@ -53,3 +53,11 @@ Ignores the Cargo.lock file and figures out all the latest versions that fit you
 ```sh
 cargo update
 ```
+
+## Cargo Local Project Documentation
+
+Builds documentation provided by all local dependencies and open it in the browser.
+
+```sh
+cargo doc --open
+```
