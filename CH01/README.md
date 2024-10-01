@@ -13,3 +13,11 @@ rustup update
 ```sh
 rustup self uninstall
 ```
+
+```sh
+rutsc main.rs
+```
+
+```sh
+rustfmt main.rs
+```
