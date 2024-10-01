@@ -132,8 +132,19 @@ fn first_word(s: &String) -> &str {
 }
 ```
 
-## &str and &String
+### &str and &String
 
 - &str is a string literal (which is a slice type)
 - String is the heap allocated type
 - String can be implicitly converted to &str
+
+### Other Slices
+
+```rust
+let a = [1, 2, 3, 4, 5];
+
+let slice = &a[1..3];
+```
+
+- slice has type `&[i32]`
+- It works the same way as string slices do, by storing a reference to the first element and a length
