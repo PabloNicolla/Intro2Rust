@@ -2,6 +2,7 @@
     "cSpell.words": [
         "rustc",
         "rustfmt",
-        "rustup"
+        "rustup",
+        "Struct"
     ]
 }
