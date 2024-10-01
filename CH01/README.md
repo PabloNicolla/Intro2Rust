@@ -1,4 +1,4 @@
-# Rust
+# Rust CH1
 
 ## Basic Commands
 
@@ -16,7 +16,7 @@ rustup self uninstall
 ### Compiling
 
 ```sh
-rutsc main.rs
+rustc main.rs
 ```
 
 ### Formatting
