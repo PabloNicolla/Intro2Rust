@@ -34,3 +34,22 @@ Can have multiple states called variants
 in case of `std::io::stdin()` is `Ok` or `Err`
 
 these states may also hold values related to their origin operation
+
+## Crates.io
+
+[Crates.io](https://crates.io/)
+
+Rust's package manager
+
+### Manually adding dependencies
+
+1. Modify Cargo.toml
+2. run $ `cargo build`
+
+### Updating a Crate
+
+Ignores the Cargo.lock file and figures out all the latest versions that fit your specifications in Cargo.toml
+
+```sh
+cargo update
+```
