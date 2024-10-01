@@ -61,3 +61,7 @@ Builds documentation provided by all local dependencies and open it in the brows
 ```sh
 cargo doc --open
 ```
+
+## Shadowing
+
+Variables can be shadowed in the same scope. Usually useful when casting values to different types.
