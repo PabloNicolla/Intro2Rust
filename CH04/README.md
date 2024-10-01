@@ -98,3 +98,42 @@ let r3 = &mut s; // BIG PROBLEM
 ### Lifetime Scope
 
 - where the variable is last used... not necessarily the scope's end
+
+## Slice Type
+
+- In short:
+  - avoid copies...
+  - ptr = start_position
+  - len = end_position
+
+```rust
+let s = String::from("hello world");
+
+let hello = &s[0..5];
+let world = &s[6..11];
+```
+
+```rust
+let slice = &s[0..len]; // same result
+let slice = &s[..];     // same result
+```
+
+```rust
+fn first_word(s: &String) -> &str {
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i];
+        }
+    }
+
+    &s[..]
+}
+```
+
+## &str and &String
+
+- &str is a string literal (which is a slice type)
+- String is the heap allocated type
+- String can be implicitly converted to &str
