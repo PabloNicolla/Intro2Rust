@@ -1,5 +1,7 @@
 {
     "cSpell.words": [
-        "rustc"
+        "rustc",
+        "rustfmt",
+        "rustup"
     ]
 }
