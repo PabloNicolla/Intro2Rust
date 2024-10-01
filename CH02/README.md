@@ -22,3 +22,15 @@ std::io::stdin()
 let apples = 5; // immutable
 let mut bananas = 5; // mutable
 ```
+
+## References
+
+Same as C++ so far...
+
+## Result Enumerations
+
+Can have multiple states called variants
+
+in case of `std::io::stdin()` is `Ok` or `Err`
+
+these states may also hold values related to their origin operation
