@@ -3,6 +3,7 @@
         "rustc",
         "rustfmt",
         "rustup",
-        "Struct"
+        "Struct",
+        "structs"
     ]
 }
