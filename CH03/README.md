@@ -6,6 +6,7 @@
   - type: `()`
   - This value represents an empty value or an empty return type.
   - Expressions implicitly return the unit value if they don’t return any other value.
+  - Somewhat similar to `C++ void`
 
 ## Arrays
 

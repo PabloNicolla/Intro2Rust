@@ -92,3 +92,15 @@ fn add_fancy_hat() {}
 fn remove_fancy_hat() {}
 fn move_player(num_spaces: u8) {}
 ```
+
+## if let
+
+- syntactic sugar for match
+- useful when considering only one possible value
+
+```rust
+let config_max = Some(3u8);
+if let Some(max) = config_max { // if config_max is Some; execute logic else ignore
+    println!("The maximum is configured to be {max}");
+}
+```
