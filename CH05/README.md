@@ -80,3 +80,56 @@ fn main() {
     dbg!(&rect1);
 }
 ```
+
+## Struct Method Implementation
+
+- Methods must have a parameter named self of type Self for their first parameter
+- self: &Self
+- &self
+- self: &mut Self
+- &mut self
+
+```rust
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+impl Rectangle { // Any function defined here will be a method of Rectangle
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+}
+
+fn main() {
+    let rect1 = Rectangle {
+        width: 30,
+        height: 50,
+    };
+
+    println!(
+        "The area of the rectangle is {} square pixels.",
+        rect1.area()
+    );
+}
+```
+
+## Associated Functions (Class Functions)
+
+- does not take `&self` as parameter
+- belongs to the type
+- accessed with `::`
+
+```rust
+impl Rectangle {
+    fn square(size: u32) -> Self {
+        Self {
+            width: size,
+            height: size,
+        }
+    }
+}
+
+let ret = Rectangle::square(20);
+```
