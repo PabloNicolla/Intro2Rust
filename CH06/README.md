@@ -4,7 +4,7 @@
 
 ```rust
 enum IpAddrKind {
-    V4,
+    V4, // variant
     V6,
 }
 
@@ -39,3 +39,25 @@ impl Message {
 let m = Message::Write(String::from("hello"));
 m.call();
 ```
+
+## Option Enum
+
+- Rust does not implement `null`
+- However, it does have `enum Option<T>`
+  - A value can be present with Some(my_value)
+  - A value can be absent with None
+
+```rust
+enum Option<T> {
+    None,
+    Some(T),
+}
+
+let some_number = Some(5);
+let some_char = Some('e');
+
+let absent_number: Option<i32> = None;
+```
+
+> [!IMPORTANT]
+> You have to convert an `Option<T>` to a `T` before you can perform `T` operations with it.
