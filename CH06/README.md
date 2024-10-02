@@ -61,3 +61,34 @@ let absent_number: Option<i32> = None;
 
 > [!IMPORTANT]
 > You have to convert an `Option<T>` to a `T` before you can perform `T` operations with it.
+
+## Match and Enums
+
+```rust
+fn plus_one(x: Option<i32>) -> Option<i32> {
+    match x {
+        None => None,           // use MyEnum::MyVariant to match the variant
+        Some(i) => Some(i + 1), // use MyEnum::MyVariant(variable_name) to access data stored by the variant
+    }
+}
+
+let five = Some(5);
+let six = plus_one(five);
+let none = plus_one(None);
+```
+
+### Catch-all Pattern
+
+```rust
+let dice_roll = 9;
+match dice_roll {
+    3 => add_fancy_hat(),
+    7 => remove_fancy_hat(),
+    other => move_player(other), // covers every other possible value
+    // _ => reroll(), // `_` covers every other possible value, but tells Rust that this variable will not be used
+}
+
+fn add_fancy_hat() {}
+fn remove_fancy_hat() {}
+fn move_player(num_spaces: u8) {}
+```
