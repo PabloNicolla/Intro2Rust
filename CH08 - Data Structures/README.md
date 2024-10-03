@@ -24,3 +24,25 @@ let row = vec![
     SpreadsheetCell::Float(10.12),
 ];
 ```
+
+## Strings
+
+### String Bytes
+
+```rust
+for b in "Зд".bytes() {
+    println!("{b}");
+}
+```
+
+### String Chars
+
+```rust
+for c in "Зд".chars() {
+    println!("{c}");
+}
+```
+
+### String Grapheme Clusters
+
+- Real/Meaningful representation
