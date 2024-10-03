@@ -6,6 +6,7 @@
         "rustup",
         "Struct",
         "structs",
+        "substr",
         "waitlist"
     ]
 }

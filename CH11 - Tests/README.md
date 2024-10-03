@@ -2,10 +2,27 @@
 
 ## Testing
 
-### Cargo Command
+- tests are not built when running `cargo build`, saving compile time
+- the `#[cfg(test)]` tells rust compiler to compile tests only when configuration has `test` option
+
+### Cargo test Commands
 
 ```sh
 cargo test
+
+cargo test --help       # display options that can be used with test
+
+cargo test -- --help    # display options that can be used after the separator 
+
+cargo test -- --test-threads=1      # control the number of threads... use 1 to prevent tests running in parallel
+
+cargo test -- --show-output         # show stdout output even for tests that passed
+
+cargo test substr_or_name           # run all tests that contain `substr_or_name` in their name
+
+cargo test -- --ignored             # run all ignored tests
+
+cargo test -- --include-ignored     # run all tests
 ```
 
 ### Example 1
@@ -101,5 +118,49 @@ fn it_works() -> Result<(), String> {
     } else {
         Err(String::from("two plus two does not equal four"))
     }
+}
+```
+
+## Ignored tests
+
+```rust
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn it_works() {
+        let result = add(2, 2);
+        assert_eq!(result, 4);
+    }
+
+    #[test]
+    #[ignore]
+    fn expensive_test() {
+        // code that takes an hour to run
+    }
+}
+```
+
+## Integration Tests
+
+```text
+adder
+├── Cargo.lock
+├── Cargo.toml
+├── src
+│   └── lib.rs
+└── tests
+    └── integration_test.rs
+```
+
+```rust
+// Filename: tests/integration_test.rs
+use adder::add_two;
+
+#[test]
+fn it_adds_two() {
+    let result = add_two(2);
+    assert_eq!(result, 4);
 }
 ```
