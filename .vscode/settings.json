@@ -5,6 +5,7 @@
         "rustfmt",
         "rustup",
         "Struct",
-        "structs"
+        "structs",
+        "waitlist"
     ]
 }

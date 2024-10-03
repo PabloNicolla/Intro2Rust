@@ -71,6 +71,88 @@ pub mod vegetables;
 pub struct Asparagus {}
 ```
 
+### Relative Path and Absolute Path
+
+```rust
+mod front_of_house {
+    pub mod hosting {
+        pub fn add_to_waitlist() {}
+    }
+}
+
+pub fn eat_at_restaurant() {
+    // Absolute path
+    crate::front_of_house::hosting::add_to_waitlist(); // absolute starting with crate::
+
+    // Relative path
+    front_of_house::hosting::add_to_waitlist(); // relative
+}
+```
+
+### super keyword
+
+```rust
+fn deliver_order() {}
+
+mod back_of_house {
+    fn fix_incorrect_order() {
+        cook_order();
+        super::deliver_order(); // similar to `$ cd ../folderName`, where `super` is `..`
+    }
+
+    fn cook_order() {}
+}
+```
+
+### as keyword
+
+```rust
+use std::fmt::Result;
+use std::io::Result as IoResult;
+```
+
+### re-exporting names
+
+```rust
+mod front_of_house {
+    pub mod hosting {
+        pub fn add_to_waitlist() {}
+    }
+}
+
+pub use crate::front_of_house::hosting;
+
+pub fn eat_at_restaurant() {
+    hosting::add_to_waitlist();
+}
+```
+
+### Nested Paths
+
+```rust
+// --snip--
+use std::cmp::Ordering;
+use std::io;
+// --snip--
+use std::io;
+use std::io::Write;
+```
+
+same as
+
+```rust
+// --snip--
+use std::{cmp::Ordering, io};
+// --snip--
+use std::io::{self, Write};
+```
+
+### Glob Operator
+
+```rust
+use std::collections::*;
+```
+
 ## Create Library
 
 ```sh
