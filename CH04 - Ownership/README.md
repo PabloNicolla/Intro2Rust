@@ -1,5 +1,19 @@
 # Rust CH04
 
+- [Rust CH04](#rust-ch04)
+  - [Ownership](#ownership)
+    - [drop](#drop)
+    - [any group simple scalar values](#any-group-simple-scalar-values)
+    - [types requiring any allocation](#types-requiring-any-allocation)
+    - [Copy vs. Clone](#copy-vs-clone)
+    - [Ownership and Functions](#ownership-and-functions)
+    - [References \& Borrowing](#references--borrowing)
+    - [Mutable References](#mutable-references)
+    - [Lifetime Scope](#lifetime-scope)
+  - [Slice Type](#slice-type)
+    - [\&str and \&String](#str-and-string)
+    - [Other Slices](#other-slices)
+
 ## Ownership
 
 ### drop

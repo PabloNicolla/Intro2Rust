@@ -1,5 +1,20 @@
 # Rust CH10
 
+- [Rust CH10](#rust-ch10)
+  - [Generics](#generics)
+    - [Functions](#functions)
+    - [Structs](#structs)
+      - [impl](#impl)
+        - [impl specialization](#impl-specialization)
+  - [Traits](#traits)
+    - [Implementing a Trait on a Type](#implementing-a-trait-on-a-type)
+      - [Default implementation](#default-implementation)
+    - [Traits Restrictions](#traits-restrictions)
+    - [Traits as Parameters](#traits-as-parameters)
+    - [Specifying Multiple Trait Bounds with the + Syntax](#specifying-multiple-trait-bounds-with-the--syntax)
+    - [Clearer Trait Bounds with where Clauses](#clearer-trait-bounds-with-where-clauses)
+    - [Conditionally Implement Methods](#conditionally-implement-methods)
+
 ## Generics
 
 ### Functions

@@ -1,5 +1,14 @@
 # Rust CH08
 
+- [Rust CH08](#rust-ch08)
+  - [Vector](#vector)
+  - [Vector (Multiple Types)](#vector-multiple-types)
+  - [Strings](#strings)
+    - [String Bytes](#string-bytes)
+    - [String Chars](#string-chars)
+    - [String Grapheme Clusters](#string-grapheme-clusters)
+  - [HashMaps](#hashmaps)
+
 ## Vector
 
 ```rust

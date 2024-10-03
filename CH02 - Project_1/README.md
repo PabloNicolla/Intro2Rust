@@ -1,5 +1,16 @@
 # RUST CH02
 
+- [RUST CH02](#rust-ch02)
+  - [Standard Library](#standard-library)
+  - [Intro2Mutability](#intro2mutability)
+  - [References](#references)
+  - [Result Enumerations](#result-enumerations)
+  - [Crates.io](#cratesio)
+    - [Manually adding dependencies](#manually-adding-dependencies)
+    - [Updating a Crate](#updating-a-crate)
+  - [Cargo Local Project Documentation](#cargo-local-project-documentation)
+  - [Shadowing](#shadowing)
+
 ## Standard Library
 
 [Standard Library](https://doc.rust-lang.org/std/prelude/index.html)

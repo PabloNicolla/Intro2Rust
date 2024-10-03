@@ -1,5 +1,14 @@
 # Rust CH05
 
+- [Rust CH05](#rust-ch05)
+  - [Struct](#struct)
+  - [Tuple Struct](#tuple-struct)
+    - [Unit-Like Struct](#unit-like-struct)
+  - [Printing structs](#printing-structs)
+  - [dbg!](#dbg)
+  - [Struct Method Implementation](#struct-method-implementation)
+  - [Associated Functions (Class Functions)](#associated-functions-class-functions)
+
 ## Struct
 
 ```rust

@@ -1,5 +1,18 @@
 # Rust CH10.5
 
+- [Rust CH10.5](#rust-ch105)
+  - [Lifetime Annotation Syntax](#lifetime-annotation-syntax)
+  - [Lifetime Annotations in Function Signatures](#lifetime-annotations-in-function-signatures)
+  - [Lifetime Annotations in Struct Definitions](#lifetime-annotations-in-struct-definitions)
+  - [lifetime elision rules](#lifetime-elision-rules)
+    - [lifetime elision rules](#lifetime-elision-rules-1)
+      - [Example 1](#example-1)
+      - [Example 2](#example-2)
+      - [Example 3](#example-3)
+      - [Example 4](#example-4)
+  - [The Static Lifetime](#the-static-lifetime)
+  - [Generic Type Parameters, Trait Bounds, and Lifetimes Together](#generic-type-parameters-trait-bounds-and-lifetimes-together)
+
 ## Lifetime Annotation Syntax
 
 - Lifetime annotations don’t change how long any of the references live.

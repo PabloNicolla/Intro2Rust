@@ -1,5 +1,15 @@
 # Rust CH09
 
+- [Rust CH09](#rust-ch09)
+  - [Panic](#panic)
+  - [Matching errors](#matching-errors)
+    - [Handling errors with closures (lambdas)](#handling-errors-with-closures-lambdas)
+  - [unwrap and expect](#unwrap-and-expect)
+  - [Error Propagation](#error-propagation)
+    - [Shortcut for Error Propagation](#shortcut-for-error-propagation)
+  - [Shortcut for Optional](#shortcut-for-optional)
+  - [main and return error](#main-and-return-error)
+
 ## Panic
 
 By default, these panics will print a failure message, unwind, clean up the stack, and quit.

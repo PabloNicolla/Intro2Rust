@@ -1,5 +1,11 @@
 # Rust CH1
 
+- [Rust CH1](#rust-ch1)
+  - [Basic Commands](#basic-commands)
+    - [Compiling](#compiling)
+    - [Formatting](#formatting)
+    - [Cargo](#cargo)
+
 ## Basic Commands
 
 ```sh

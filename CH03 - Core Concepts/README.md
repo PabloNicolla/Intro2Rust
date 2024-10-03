@@ -1,5 +1,14 @@
 # Rust CH03
 
+- [Rust CH03](#rust-ch03)
+  - [Tuple, unit and default return value](#tuple-unit-and-default-return-value)
+  - [Arrays](#arrays)
+  - [Tail](#tail)
+  - [loop and break](#loop-and-break)
+  - [loop labels and break](#loop-labels-and-break)
+  - [While and For](#while-and-for)
+  - [Range](#range)
+
 ## Tuple, unit and default return value
 
 - `()`: The tuple without any values has a special name, unit.

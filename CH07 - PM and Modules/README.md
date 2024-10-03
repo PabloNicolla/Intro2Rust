@@ -1,5 +1,19 @@
 # Rust CH07
 
+- [Rust CH07](#rust-ch07)
+  - [module system](#module-system)
+    - [Packages and Crates](#packages-and-crates)
+    - [Modules Privacy and Scope](#modules-privacy-and-scope)
+      - [Modules Cheat Sheet](#modules-cheat-sheet)
+      - [mod example](#mod-example)
+    - [Relative Path and Absolute Path](#relative-path-and-absolute-path)
+    - [super keyword](#super-keyword)
+    - [as keyword](#as-keyword)
+    - [re-exporting names](#re-exporting-names)
+    - [Nested Paths](#nested-paths)
+    - [Glob Operator](#glob-operator)
+  - [Create Library](#create-library)
+
 ## module system
 
 - Packages: A Cargo feature that lets you build, test, and share crates

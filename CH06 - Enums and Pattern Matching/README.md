@@ -1,5 +1,14 @@
 # Rust CH06
 
+- [Rust CH06](#rust-ch06)
+  - [Enums](#enums)
+    - [Enums with custom data](#enums-with-custom-data)
+    - [Enum Method Implementation](#enum-method-implementation)
+  - [Option Enum](#option-enum)
+  - [Match and Enums](#match-and-enums)
+    - [Catch-all Pattern](#catch-all-pattern)
+  - [if let](#if-let)
+
 ## Enums
 
 ```rust
