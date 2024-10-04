@@ -8,6 +8,7 @@
   - [dbg!](#dbg)
   - [Struct Method Implementation](#struct-method-implementation)
   - [Associated Functions (Class Functions)](#associated-functions-class-functions)
+  - [`#[derive]`](#derive)
 
 ## Struct
 
@@ -141,4 +142,16 @@ impl Rectangle {
 }
 
 let ret = Rectangle::square(20);
+```
+
+## `#[derive]`
+
+- `#[derive]` is a powerful macro that automatically generates implementations of certain traits for your structs and enums.
+
+```rust
+#[derive(Debug, PartialEq, Copy, Clone)]
+enum ShirtColor {
+    Red,
+    Blue,
+}
 ```
