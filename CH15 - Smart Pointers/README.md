@@ -7,6 +7,7 @@
     - [Rc](#rc)
     - [Interior Mutability Pattern and Summary](#interior-mutability-pattern-and-summary)
     - [`RefCell<T>`](#refcellt)
+    - [Preventing Reference Cycles: Turning an `Rc<T>` into a `Weak<T>`](#preventing-reference-cycles-turning-an-rct-into-a-weakt)
   - [Deref Trait Implementation](#deref-trait-implementation)
   - [Deref Coercion](#deref-coercion)
     - [Deref Coercion Example](#deref-coercion-example)
@@ -160,6 +161,51 @@ fn main() {
 
 > [!NOTE]
 > Strange similar idea to const_cast<>(), but safer with run-time borrower checks
+
+### Preventing Reference Cycles: Turning an `Rc<T>` into a `Weak<T>`
+
+- `Rc<T>` instance is only cleaned up if its **strong_count** is 0
+- **weak_count** does not influence the lifetime of `Rc<T>`
+
+- `Weak<T>` can be created by passing `Rc<T>` to `Rc::downgrade`
+
+- to use a `Weak<T>` it needs to be upgraded back to `Rc<T>`
+  - since it is unknown if `Rc<T>` was dropped, this returns an `Option<Rc<T>>`
+
+```rust
+use std::cell::RefCell;
+use std::rc::{Rc, Weak};
+
+#[derive(Debug)]
+struct Node {
+    value: i32,
+    parent: RefCell<Weak<Node>>,
+    children: RefCell<Vec<Rc<Node>>>,
+}
+
+fn main() {
+    let leaf = Rc::new(Node {
+        value: 3,
+        parent: RefCell::new(Weak::new()),
+        children: RefCell::new(vec![]),
+    });
+
+    println!("leaf parent = {:?}", leaf.parent.borrow().upgrade());
+
+    let branch = Rc::new(Node {
+        value: 5,
+        parent: RefCell::new(Weak::new()),
+        children: RefCell::new(vec![Rc::clone(&leaf)]),
+    });
+
+    *leaf.parent.borrow_mut() = Rc::downgrade(&branch);
+
+    println!("leaf parent = {:?}", leaf.parent.borrow().upgrade());
+
+    Rc::strong_count(&branch);
+    Rc::weak_count(&branch);
+}
+```
 
 ## Deref Trait Implementation
 
