@@ -11,6 +11,7 @@
     - [Iterator Trait](#iterator-trait)
     - [consuming adaptors](#consuming-adaptors)
     - [Iterator adaptors](#iterator-adaptors)
+    - [Iterator Type as parameter](#iterator-type-as-parameter)
 
 ## Closures
 
@@ -167,3 +168,13 @@ Explanation:
 - .map consumes an iterator
 - .map creates a new iterator as the result/return of its operation
 - since iterators are lazy and needs to be consumed, .collect() must be called to transform the iterator into a Vec collection
+
+### Iterator Type as parameter
+
+```rust
+impl Config {
+    pub fn build(
+        mut args: impl Iterator<Item = String>,
+    ) -> Result<Config, &'static str> {
+        // --snip--
+```
