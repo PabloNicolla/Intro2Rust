@@ -1,5 +1,17 @@
 # Rust CH11
 
+- [Rust CH11](#rust-ch11)
+  - [Testing](#testing)
+    - [Cargo test Commands](#cargo-test-commands)
+    - [Example 1](#example-1)
+    - [assert!](#assert)
+  - [assert\_eq! and assert\_ne!](#assert_eq-and-assert_ne)
+  - [Custom messages](#custom-messages)
+  - [Should Panic](#should-panic)
+  - [Using `Result<T, E>` in Tests](#using-resultt-e-in-tests)
+  - [Ignored tests](#ignored-tests)
+  - [Integration Tests](#integration-tests)
+
 ## Testing
 
 - tests are not built when running `cargo build`, saving compile time
