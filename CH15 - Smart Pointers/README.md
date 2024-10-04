@@ -76,6 +76,32 @@ fn main() {
 }                                           // it also increases the reference count
 ```
 
+### Interior Mutability Pattern and Summary
+
+- Borrowing Rules
+  - At any given time, you can have either (but not both) one mutable reference or any number of immutable references.
+  - References must always be valid.
+
+- Ownership:
+  - Rc<T> enables multiple owners of the same data;
+  - Box<T> and RefCell<T> have single owners.
+
+- Borrowing Rules Check
+  - Box<T> allows immutable or mutable borrows checked at compile time;
+  - Rc<T> allows only immutable borrows checked at compile time;
+  - RefCell<T> allows immutable or mutable borrows checked at runtime.
+
+- Because RefCell<T> allows mutable borrows checked at runtime, you can mutate the value inside the RefCell<T> even when the RefCell<T> is immutable.
+
+- With references, if you break these rules, you'll get a compiler error. 
+- With RefCell<T>, if you break these rules, your program will panic and exit.
+
+- The RefCell<T> type is useful when you're sure your code follows the borrowing rules but the compiler is unable to understand and guarantee that.
+
+### `RefCell<T>`
+
+- single-threaded
+
 ## Deref Trait Implementation
 
 ```rust
