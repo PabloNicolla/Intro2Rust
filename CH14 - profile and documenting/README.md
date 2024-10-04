@@ -7,6 +7,8 @@
     - [Documentation Comments as Tests](#documentation-comments-as-tests)
     - [Commenting Contained Items](#commenting-contained-items)
   - [re-export items](#re-export-items)
+  - [workspaces](#workspaces)
+  - [Installing Binaries with cargo install](#installing-binaries-with-cargo-install)
 
 ## Build Profiles
 
@@ -84,3 +86,41 @@ pub use self::kinds::PrimaryColor;
 pub use self::kinds::SecondaryColor;
 pub use self::utils::mix;
 ```
+
+## workspaces
+
+- A workspace is a set of packages that share the same Cargo.lock and output directory.
+- good for managing large projects.
+
+structure example
+
+```text
+├── Cargo.lock
+├── Cargo.toml            // Root config
+├── add_one
+│   ├── Cargo.toml
+│   └── src
+│       └── lib.rs
+├── adder
+│   ├── Cargo.toml
+│   └── src
+│       └── main.rs
+└── target
+```
+
+## Installing Binaries with cargo install
+
+- Similar to npm i ... -g
+- This command installs a Rust binary crate globally on your system.
+
+example
+
+```sh
+cargo install ripgrep
+
+# if $PATH is correctly configure to use binaries installed with cargo install
+
+rg --help
+```
+
+default installation directory `$HOME/.cargo/bin`
