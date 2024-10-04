@@ -96,3 +96,33 @@ hello(&(*m)[..]);
 - steps:
   - 1: `m.deref()`
   - 2: `&m_value[..]`
+
+## Drop Implementation
+
+- Called automatically on instance destruction
+- Called in reverse order of construction... `Stack`
+
+```rust
+struct CustomSmartPointer {
+    data: String,
+}
+
+impl Drop for CustomSmartPointer {
+    fn drop(&mut self) {
+        println!("Dropping CustomSmartPointer with data `{}`!", self.data);
+    }
+}
+```
+
+### Manual Drop call
+
+- Rust doesn’t let you call the `Drop` trait’s drop method manually;
+- instead you have to call the `std::mem::drop function` provided by the standard library.
+
+```rust
+// std::mem::drop
+let c = CustomSmartPointer {
+    data: String::from("some data"),
+};
+drop(c);
+```
