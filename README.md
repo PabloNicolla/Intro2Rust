@@ -15,3 +15,4 @@
 - [ENV variables and stderr](<CH12 - Project_2/README.md>)
 - [Iterators and Closures](<CH13 - Iterators and Closures/README.md>)
 - [profile and documenting](<CH14 - profile and documenting/README.md>)
+- [Smart Pointers](<CH15 - Smart Pointers/README.md>)
