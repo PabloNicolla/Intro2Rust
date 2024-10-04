@@ -1,5 +1,18 @@
 # Rust CH15
 
+- [Rust CH15](#rust-ch15)
+  - [Smart Pointers](#smart-pointers)
+    - [Reference and Pointers](#reference-and-pointers)
+    - [`Box<T>`](#boxt)
+    - [Rc](#rc)
+    - [Interior Mutability Pattern and Summary](#interior-mutability-pattern-and-summary)
+    - [`RefCell<T>`](#refcellt)
+  - [Deref Trait Implementation](#deref-trait-implementation)
+  - [Deref Coercion](#deref-coercion)
+    - [Deref Coercion Example](#deref-coercion-example)
+  - [Drop Implementation](#drop-implementation)
+    - [Manual Drop call](#manual-drop-call)
+
 ## Smart Pointers
 
 Implemented Traits
@@ -100,7 +113,53 @@ fn main() {
 
 ### `RefCell<T>`
 
-- single-threaded
+> [!WARNING]
+> if used incorrectly it can cause run-time crash
+
+- **single-thread only**
+- Useful for allowing mutability with `Rc<T>`
+- Useful for creating **Mock Objects**
+
+- Borrowing Rules Check
+  - Instead of going through static analysis during compile time, it is checked during run-time
+  - `.borrow()`
+    - Borrows an immutable reference to the value
+    - Adds one to the counter of immutable reference borrowed
+  - `.borrow_mut()`
+    - Borrows a mutable reference to the value
+    - Adds one to the counter of mutable reference borrowed
+  - **Valid Usage:**
+    - many immutable borrows or one mutable borrow at any point in time
+
+```rust
+#[derive(Debug)]
+enum List {
+    Cons(Rc<RefCell<i32>>, Rc<List>),
+    Nil,
+}
+
+use crate::List::{Cons, Nil};
+use std::cell::RefCell;
+use std::rc::Rc;
+
+fn main() {
+    let value = Rc::new(RefCell::new(5));
+
+    let a = Rc::new(Cons(Rc::clone(&value), Rc::new(Nil)));
+
+    let b = Cons(Rc::new(RefCell::new(3)), Rc::clone(&a));
+    let c = Cons(Rc::new(RefCell::new(4)), Rc::clone(&a));
+
+    *value.borrow_mut() += 10;
+
+    println!("a after = {a:?}");
+    println!("b after = {b:?}");
+    println!("c after = {c:?}");
+}
+```
+
+> [!NOTE]
+> Strange similar idea to const_cast<>(), but safer with run-time borrower checks
 
 ## Deref Trait Implementation
 
