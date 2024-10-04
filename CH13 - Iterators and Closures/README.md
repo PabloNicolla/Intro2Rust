@@ -8,10 +8,14 @@
     - [Closure Traits](#closure-traits)
       - [Example: defining function as a parameter](#example-defining-function-as-a-parameter)
   - [Iterators](#iterators)
+    - [Iterator Trait](#iterator-trait)
+    - [consuming adaptors](#consuming-adaptors)
+    - [Iterator adaptors](#iterator-adaptors)
 
 ## Closures
 
 - The first call of a closure with inferred types defines the type until the end of its lifetime
+- Closures capture their environment
 
 ```rust
 fn  add_one_v1   (x: u32) -> u32 { x + 1 }
@@ -94,3 +98,72 @@ impl<T> Option<T> {
 ```
 
 ## Iterators
+
+- iterators are consumed
+- `iter`: iterate over **immutable** references
+- `into_iter`:  iterator that **takes ownership** of `v1` and returns owned values
+- `iter_mut`: iterate over **mutable references**
+
+```rust
+let v1 = vec![1, 2, 3];
+
+let v1_iter = v1.iter();
+
+for val in v1_iter {
+    println!("Got: {val}");
+}
+```
+
+### Iterator Trait
+
+- `type Item` associated type
+  - must be defined
+- next method: returns the next element wrapped in `Some`, or it returns `None` when finished
+  - must be implemented
+
+```rust
+pub trait Iterator {
+    type Item;
+
+    fn next(&mut self) -> Option<Self::Item>;
+
+    // methods with default implementations elided
+}
+```
+
+### consuming adaptors
+
+Methods that call `next` are called **consuming adaptors**
+
+```rust
+#[test]
+fn iterator_sum() {
+    let v1 = vec![1, 2, 3];
+
+    let v1_iter = v1.iter();
+
+    let total: i32 = v1_iter.sum();
+
+    assert_eq!(total, 6);
+}
+```
+
+### Iterator adaptors
+
+- Iterator adaptors are methods defined on the Iterator trait that don’t consume the iterator.
+- Instead, they produce different iterators by changing some aspect of the original iterator.
+
+```rust
+let v1: Vec<i32> = vec![1, 2, 3];
+
+let v2: Vec<_> = v1.iter().map(|x| x + 1).collect();  // must be consumed and collected by .collect(),
+                                                      // otherwise nothing happens to the created iterator
+
+assert_eq!(v2, vec![2, 3, 4]);
+```
+
+Explanation:
+
+- .map consumes an iterator
+- .map creates a new iterator as the result/return of its operation
+- since iterators are lazy and needs to be consumed, .collect() must be called to transform the iterator into a Vec collection
