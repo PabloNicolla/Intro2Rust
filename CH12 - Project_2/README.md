@@ -1,5 +1,10 @@
 # Rust CH12
 
+- [Rust CH12](#rust-ch12)
+  - [Program Arguments](#program-arguments)
+  - [Reading Environment Variables](#reading-environment-variables)
+  - [stderr](#stderr)
+
 ## Program Arguments
 
 - similar to argc and argc
@@ -33,3 +38,8 @@ Remove-Item Env:IGNORE_CASE
 ```rust
 let ignore_case = env::var("IGNORE_CASE")/*...*/;
 ```
+
+## stderr
+
+- `println!` prints to stdout
+- `eprintln!` prints to stderr

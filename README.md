@@ -12,3 +12,6 @@
 - [Generics, Traits, and conditional implementation](<CH10 - Generics/README.md>)
 - [Lifetimes](<CH10.5 - Lifetime/README.md>)
 - [Tests](<CH11 - Tests/README.md>)
+- [ENV variables and stderr](<CH12 - Project_2/README.md>)
+- [Iterators and Closures](<CH13 - Iterators and Closures/README.md>)
+- 
