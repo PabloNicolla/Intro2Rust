@@ -48,6 +48,34 @@ enum List {
 }
 ```
 
+### Rc<T>
+
+- abbreviation for reference counting.
+- If there are zero references to a value, the value can be cleaned up without any references becoming invalid.
+- **only for use in single-threaded scenarios**
+- `Rc<T>` allows **reading only**
+  - immutable references
+  - `RefCell<T>` can be used to work with this immutability restriction
+
+- strong_count
+- weak_count
+
+```rust
+enum List {
+    Cons(i32, Rc<List>),
+    Nil,
+}
+
+use crate::List::{Cons, Nil};
+use std::rc::Rc;
+
+fn main() {
+    let a = Rc::new(Cons(5, Rc::new(Cons(10, Rc::new(Nil)))));
+    let b = Cons(3, Rc::clone(&a));         // no deep copy is made here
+    let c = Cons(4, Rc::clone(&a));         // clone is implemented differently from other types
+}                                           // it also increases the reference count
+```
+
 ## Deref Trait Implementation
 
 ```rust
