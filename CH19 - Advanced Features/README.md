@@ -9,7 +9,13 @@
     - [Implementing an Unsafe Trait](#implementing-an-unsafe-trait)
     - [Accessing Fields of a Union](#accessing-fields-of-a-union)
   - [Advanced Traits](#advanced-traits)
+    - [Default Generic Type Parameters and Operator Overloading](#default-generic-type-parameters-and-operator-overloading)
+    - [Fully Qualified Syntax for Disambiguation: Calling Methods with the Same Name](#fully-qualified-syntax-for-disambiguation-calling-methods-with-the-same-name)
+      - [Associated Function with the same name](#associated-function-with-the-same-name)
+    - [Using Supertraits to Require One Trait’s Functionality Within Another Trait](#using-supertraits-to-require-one-traits-functionality-within-another-trait)
   - [Advanced Types](#advanced-types)
+    - [Creating Type Synonyms with Type Aliases](#creating-type-synonyms-with-type-aliases)
+    - [The Never Type that Never Returns](#the-never-type-that-never-returns)
   - [Advanced Functions and Closures](#advanced-functions-and-closures)
   - [Macros](#macros)
 
@@ -137,7 +143,175 @@ Unions are primarily used to interface with unions in C code.
 
 ## Advanced Traits
 
+```rust
+pub trait Iterator {
+    type Item;                  // Somewhat similar to generic placeholder type (<T>)
+                                // Allows you to use Item without knowing/defining the type it can/will be
+    fn next(&mut self) -> Option<Self::Item>;
+}
+```
+
+```rust
+impl Iterator for Counter {
+    type Item = u32;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        // --snip--
+```
+
+### Default Generic Type Parameters and Operator Overloading
+
+```rust
+trait Add<Rhs=Self> {           // default
+    type Output;
+
+    fn add(self, rhs: Rhs) -> Self::Output;
+}
+```
+
+```rust
+use std::ops::Add;
+
+#[derive(Debug, Copy, Clone, PartialEq)]
+struct Point {
+    x: i32,
+    y: i32,
+}
+
+impl Add for Point {
+    type Output = Point;
+
+    fn add(self, other: Point) -> Point {
+        Point {
+            x: self.x + other.x,
+            y: self.y + other.y,
+        }
+    }
+}
+
+fn main() {
+    assert_eq!(
+        Point { x: 1, y: 0 } + Point { x: 2, y: 3 },
+        Point { x: 3, y: 3 }
+    );
+}
+```
+### Fully Qualified Syntax for Disambiguation: Calling Methods with the Same Name
+
+```rust
+trait Pilot {
+    fn fly(&self);
+}
+
+trait Wizard {
+    fn fly(&self);
+}
+
+struct Human;
+
+impl Pilot for Human {
+    fn fly(&self) {
+        println!("This is your captain speaking.");
+    }
+}
+
+impl Wizard for Human {
+    fn fly(&self) {
+        println!("Up!");
+    }
+}
+
+impl Human {
+    fn fly(&self) {
+        println!("*waving arms furiously*");
+    }
+}
+```
+
+```rust
+fn main() {
+    let person = Human;
+    Pilot::fly(&person);
+    Wizard::fly(&person);
+    person.fly();
+}
+```
+
+#### Associated Function with the same name
+
+```rust
+trait Animal {
+    fn baby_name() -> String;
+}
+
+struct Dog;
+
+impl Dog {
+    fn baby_name() -> String {
+        String::from("Spot")
+    }
+}
+
+impl Animal for Dog {
+    fn baby_name() -> String {
+        String::from("puppy")
+    }
+}
+
+fn main() {
+    println!("A baby dog is called a {}", Dog::baby_name());
+    println!("A baby dog is called a {}", <Dog as Animal>::baby_name());
+}
+```
+
+### Using Supertraits to Require One Trait’s Functionality Within Another Trait
+
+- enforces any type implementing `OutlinePrint` trait to have `Display` trait also implemented
+
+```rust
+trait OutlinePrint: fmt::Display {
+    /**/
+}
+```
+
 ## Advanced Types
+
+### Creating Type Synonyms with Type Aliases
+
+custom names
+
+```rust
+type Kilometers = i32;
+```
+
+reduce repetition of large types
+
+```rust
+type Thunk = Box<dyn Fn() + Send + 'static>;
+
+let f: Thunk = Box::new(|| println!("hi"));
+
+fn takes_long_type(f: Thunk) {
+    // --snip--
+}
+
+fn returns_long_type() -> Thunk {
+    // --snip--
+}
+```
+
+### The Never Type that Never Returns
+
+- `!` is the **never type**
+- represents an empty type because it has no values
+- used in functions that never return **diverging functions**
+- somewhat similar to C++ `noreturn`
+
+```rust
+fn bar() -> ! {
+    // --snip--
+}
+```
 
 ## Advanced Functions and Closures
 
