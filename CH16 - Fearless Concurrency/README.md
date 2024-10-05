@@ -111,3 +111,92 @@ fn main() {
 
 - the spawned thread needs to own the transmitter, then the use of `move`
 
+### Sending Multiple Values and Seeing the Receiver Waiting
+
+```rust
+use std::sync::mpsc;
+use std::thread;
+use std::time::Duration;
+
+fn main() {
+    let (tx, rx) = mpsc::channel();
+
+    thread::spawn(move || {
+        let vals = vec![
+            String::from("hi"),
+            String::from("from"),
+            String::from("the"),
+            String::from("thread"),
+        ];
+
+        for val in vals {
+            tx.send(val).unwrap();
+            thread::sleep(Duration::from_secs(1));
+        }
+    });
+
+    for received in rx {
+        println!("Got: {received}");
+    }
+}
+```
+
+outcome
+
+```text
+Got: hi
+Got: from
+Got: the
+Got: thread
+```
+
+### Creating Multiple Producers by Cloning the Transmitter
+
+```rust
+    // --snip--
+
+    let (tx, rx) = mpsc::channel();
+
+    let tx1 = tx.clone();
+    thread::spawn(move || {
+        let vals = vec![
+            String::from("hi"),
+            String::from("from"),
+            String::from("the"),
+            String::from("thread"),
+        ];
+
+        for val in vals {
+            tx1.send(val).unwrap();
+            thread::sleep(Duration::from_secs(1));
+        }
+    });
+
+    thread::spawn(move || {
+        let vals = vec![
+            String::from("more"),
+            String::from("messages"),
+            String::from("for"),
+            String::from("you"),
+        ];
+
+        for val in vals {
+            tx.send(val).unwrap();
+            thread::sleep(Duration::from_secs(1));
+        }
+    });
+
+    for received in rx {
+        println!("Got: {received}");
+    }
+
+    // --snip--
+```
+
+### mpsc::sync_channel vs. mpsc::channel
+
+- `mpsc::channel`
+  - **Unbuffered channels:** The sender (tx) will block on .send() until the receiver (rx) reads the message.
+
+- `mpsc::sync_channel`
+  - **Buffered channels:** The sender will block only if the buffer is full. If there's space in the buffer, the sender can send multiple messages without waiting for the receiver to read each one immediately.
