@@ -1,5 +1,17 @@
 # Rust CH16
 
+- [Rust CH16](#rust-ch16)
+  - [Fearless Concurrency](#fearless-concurrency)
+    - [`thread::spawn`](#threadspawn)
+      - [`join` Handles](#join-handles)
+      - [Threads and Closures](#threads-and-closures)
+  - [Message Passing to Transfer Data Between Threads](#message-passing-to-transfer-data-between-threads)
+    - [Sending Multiple Values and Seeing the Receiver Waiting](#sending-multiple-values-and-seeing-the-receiver-waiting)
+    - [Creating Multiple Producers by Cloning the Transmitter](#creating-multiple-producers-by-cloning-the-transmitter)
+    - [mpsc::sync\_channel vs. mpsc::channel](#mpscsync_channel-vs-mpscchannel)
+  - [Shared-State Concurrency](#shared-state-concurrency)
+    - [Mutex](#mutex)
+
 ## Fearless Concurrency
 
 - **concurrent programming**, where different parts of a program execute independently
@@ -200,3 +212,44 @@ Got: thread
 
 - `mpsc::sync_channel`
   - **Buffered channels:** The sender will block only if the buffer is full. If there's space in the buffer, the sender can send multiple messages without waiting for the receiver to read each one immediately.
+
+## Shared-State Concurrency
+
+### Mutex
+
+- is an abbreviation for **mutual exclusion**
+
+- two rules:
+  - You must attempt to **acquire the lock** before using the data.
+  - **When you’re done with the data** that the mutex guards, you must **unlock the data** so other threads can acquire the lock.
+
+- the smart pointer returned by `mutex.lock()` implements `Deref`
+  - meaning, the lock is released automatically when the smart points goes out of scope
+
+- `Mutex<T>` provides interior mutability similar to `RefCell<T>`
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn main() {
+    let counter = Arc::new(Mutex::new(0));    // Arc is similar to Rc but thread safe
+    let mut handles = vec![];
+
+    for _ in 0..10 {
+        let counter = Arc::clone(&counter);
+        let handle = thread::spawn(move || {
+            let mut num = counter.lock().unwrap();
+
+            *num += 1;
+        });
+        handles.push(handle);
+    }
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    println!("Result: {}", *counter.lock().unwrap());
+}
+```
