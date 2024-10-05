@@ -17,6 +17,8 @@
     - [Creating Type Synonyms with Type Aliases](#creating-type-synonyms-with-type-aliases)
     - [The Never Type that Never Returns](#the-never-type-that-never-returns)
   - [Advanced Functions and Closures](#advanced-functions-and-closures)
+    - [Function Pointers](#function-pointers)
+    - [Returning Closures](#returning-closures)
   - [Macros](#macros)
 
 ## Unsafe Rust
@@ -314,5 +316,34 @@ fn bar() -> ! {
 ```
 
 ## Advanced Functions and Closures
+
+### Function Pointers
+
+- The `fn` type is called a function pointer
+- Function pointers implement all three of the closure `traits` `(Fn, FnMut, and FnOnce)`
+
+```rust
+fn add_one(x: i32) -> i32 {
+    x + 1
+}
+
+fn do_twice(f: fn(i32) -> i32, arg: i32) -> i32 {           // fn receives one i32 and returns i32
+    f(arg) + f(arg)
+}
+
+fn main() {
+    let answer = do_twice(add_one, 5);
+
+    println!("The answer is: {answer}");
+}
+```
+
+### Returning Closures
+
+```rust
+fn returns_closure() -> Box<dyn Fn(i32) -> i32> {
+    Box::new(|x| x + 1)
+}
+```
 
 ## Macros
