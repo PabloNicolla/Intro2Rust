@@ -18,3 +18,4 @@
 - [Smart Pointers](<CH15 - Smart Pointers/README.md>)
 - [Fearless Concurrency](<CH16 - Fearless Concurrency/README.md>)
 - [OOP](<CH17 - OOP/README.md>)
+- [Patterns and Matching](<CH18 - Patterns and Matching/README.md>)

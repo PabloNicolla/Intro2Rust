@@ -1,4 +1,10 @@
-# Rust CH 17
+# Rust CH17
+
+- [Rust CH17](#rust-ch17)
+  - [OOP](#oop)
+    - [Encapsulation](#encapsulation)
+    - [Inheritance](#inheritance)
+    - [Polymorphism](#polymorphism)
 
 ## OOP
 
