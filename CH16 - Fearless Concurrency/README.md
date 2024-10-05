@@ -11,6 +11,10 @@
     - [mpsc::sync\_channel vs. mpsc::channel](#mpscsync_channel-vs-mpscchannel)
   - [Shared-State Concurrency](#shared-state-concurrency)
     - [Mutex](#mutex)
+  - [Extensible Concurrency](#extensible-concurrency)
+    - [`Send` Trait](#send-trait)
+    - [`Sync` Trait](#sync-trait)
+    - [Implementing Send and Sync Manually Is Unsafe](#implementing-send-and-sync-manually-is-unsafe)
 
 ## Fearless Concurrency
 
@@ -253,3 +257,24 @@ fn main() {
     println!("Result: {}", *counter.lock().unwrap());
 }
 ```
+
+## Extensible Concurrency
+
+- `std::marker` traits `Sync` and `Send`
+
+### `Send` Trait
+
+- The `Send` marker trait indicates that ownership of values of the type implementing `Send` can be **transferred between threads**.
+- Almost every Rust type is `Send`, but there are some exceptions, including `Rc<T>`
+  - Where there is the risk of two threads trying to update the reference count at the same time
+
+### `Sync` Trait
+
+- The `Sync` marker trait **indicates that it is safe** for the type implementing `Sync` to be **referenced from multiple threads**.
+
+- In other words, any type `T` is `Sync` if `&T` (an immutable reference to T) is `Send`, meaning the reference can be sent safely to another thread.
+- Similar to `Send`, primitive types are `Sync`, and types composed entirely of types that are `Sync` are also `Sync`.
+
+### Implementing Send and Sync Manually Is Unsafe
+
+- Because types that are made up of `Send` and `Sync` traits are automatically also `Send` and `Sync`, we don’t have to implement those traits manually.
