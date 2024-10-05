@@ -1,13 +1,27 @@
 # Rust CH18
 
 - [Rust CH18](#rust-ch18)
-  - [](#)
-
-    Literals
-    Destructured arrays, enums, structs, or tuples
-    Variables
-    Wildcards
-    Placeholders
+  - [Match](#match)
+  - [if let](#if-let)
+  - [while let](#while-let)
+  - [let](#let)
+  - [Refutability: Whether a Pattern Might Fail to Match](#refutability-whether-a-pattern-might-fail-to-match)
+  - [Matching Named Variables](#matching-named-variables)
+  - [Multiple Patterns](#multiple-patterns)
+  - [Matching Range](#matching-range)
+  - [Destructuring to Break Apart Values](#destructuring-to-break-apart-values)
+    - [Destructuring Structs](#destructuring-structs)
+      - [Custom names](#custom-names)
+      - [Struct defined names](#struct-defined-names)
+      - [Custom literal values](#custom-literal-values)
+    - [Destructuring Enums](#destructuring-enums)
+    - [Destructuring Nested Structs and Enums](#destructuring-nested-structs-and-enums)
+    - [Destructuring Structs and Tuples](#destructuring-structs-and-tuples)
+    - [Ignoring Values in a Pattern](#ignoring-values-in-a-pattern)
+      - [Ignoring an Entire Value with `_`](#ignoring-an-entire-value-with-_)
+      - [Ignoring Remaining Parts of a Value with ..](#ignoring-remaining-parts-of-a-value-with-)
+  - [Extra Conditionals with Match Guards](#extra-conditionals-with-match-guards)
+  - [`@` Bindings](#-bindings)
 
 ## Match
 
