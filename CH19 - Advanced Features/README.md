@@ -20,6 +20,11 @@
     - [Function Pointers](#function-pointers)
     - [Returning Closures](#returning-closures)
   - [Macros](#macros)
+    - [The Difference Between Macros and Functions](#the-difference-between-macros-and-functions)
+    - [Declarative Macros with `macro_rules!`](#declarative-macros-with-macro_rules)
+    - [Procedural Macros](#procedural-macros)
+    - [Attribute Macros](#attribute-macros)
+    - [Function-Like Macros](#function-like-macros)
 
 ## Unsafe Rust
 
@@ -347,3 +352,95 @@ fn returns_closure() -> Box<dyn Fn(i32) -> i32> {
 ```
 
 ## Macros
+
+three kinds of procedural macros:
+
+- **Custom `#[derive]` macros** that specify code added with the derive attribute used on structs and enums
+- **Attribute-like macros** that define custom attributes usable on any item
+- **Function-like macros** that look like function calls but operate on the tokens specified as their argument
+
+### The Difference Between Macros and Functions
+
+- **Metaprogramming**
+  - code that writes other code
+- Macros, differently from functions, can take a variable number of parameters
+- code expanded before compile time
+
+### Declarative Macros with `macro_rules!`
+
+At their core, declarative macros allow you to write something similar to a Rust match expression.
+
+slightly simplified definition of the vec! macro:
+
+```rust
+#[macro_export]
+macro_rules! vec {
+    ( $( $x:expr ),* ) => {
+        {
+            let mut temp_vec = Vec::new();
+            $(
+                temp_vec.push($x);
+            )*
+            temp_vec
+        }
+    };
+}
+```
+
+- `$` declares a variable in the macro
+- `($x:expr)` matches any Rust expression and gives it the name `$x`
+- `,` separator can optionally appear in the captured expression
+- `*` match zero or more of whatever precedes the `*`
+
+output for `vec![1, 2, 3];`:
+
+```rust
+{
+    let mut temp_vec = Vec::new();
+    temp_vec.push(1);
+    temp_vec.push(2);
+    temp_vec.push(3);
+    temp_vec
+}
+```
+
+### Procedural Macros
+
+```rust
+use proc_macro;
+
+#[some_attribute]
+pub fn some_name(input: TokenStream) -> TokenStream {
+}
+```
+
+```rust
+#[some_attribute]
+struct SomeStruct
+```
+
+### Attribute Macros
+
+```rust
+#[proc_macro_attribute]
+pub fn route(attr: TokenStream, item: TokenStream) -> TokenStream {
+}
+```
+
+```rust
+#[route(GET, "/")]
+fn index() {
+}
+```
+
+### Function-Like Macros
+
+```rust
+#[proc_macro]
+pub fn sql(input: TokenStream) -> TokenStream {
+}
+```
+
+```rust
+let sql = sql!(SELECT * FROM posts WHERE id=1);
+```
