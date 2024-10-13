@@ -5,6 +5,7 @@
     - [Compiling](#compiling)
     - [Formatting](#formatting)
     - [Cargo](#cargo)
+    - [Debug](#debug)
 
 ## Basic Commands
 
@@ -55,4 +56,12 @@ cargo check
 
 ```sh
 cargo build --release
+```
+
+### Debug
+
+- get compiled/expanded code. Good for debugging macros
+
+```sh
+cargo expand >> expanded.rs
 ```
