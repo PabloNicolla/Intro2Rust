@@ -3,12 +3,15 @@
         "Metaprogramming",
         "noreturn",
         "println",
+        "rusqlite",
         "rustc",
         "rustfmt",
         "rustup",
+        "serde",
         "Struct",
         "structs",
         "substr",
+        "thiserror",
         "waitlist"
     ]
 }
