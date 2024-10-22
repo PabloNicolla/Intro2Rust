@@ -10,3 +10,9 @@ runs from `examples/` folder
 ```sh
 cargo run --example hello-redis
 ```
+
+runs from `src/bin/` folder
+
+```sh
+cargo run --bin server
+```

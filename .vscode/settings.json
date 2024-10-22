@@ -1,7 +1,10 @@
 {
     "cSpell.words": [
+        "Backpressure",
         "Metaprogramming",
+        "mpsc",
         "noreturn",
+        "oneshot",
         "println",
         "rusqlite",
         "rustc",
