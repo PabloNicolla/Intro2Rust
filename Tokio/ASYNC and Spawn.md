@@ -1,6 +1,6 @@
-# ASYNC
+# ASYNC and Spawn
 
-- [ASYNC](#async)
+- [ASYNC and Spawn](#async-and-spawn)
   - [Introduction](#introduction)
   - [Using `async/await`](#using-asyncawait)
   - [Tasks and Spawn](#tasks-and-spawn)
