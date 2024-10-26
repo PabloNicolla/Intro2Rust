@@ -98,6 +98,15 @@ Here are the main approaches to handle concurrent futures, from simplest to more
    - Completes when the first future finishes
    - Can handle the results differently based on which completes first
 
-5. `spawn + join_handle`: For true parallelism
+5. `select! + loop`: 4. variant: tries to complete all futures
+   ```rust
+    loop {
+        select! {
+            //...
+        }
+    }
+   ```
+
+6. `spawn + join_handle`: For true parallelism
    - Creates new tasks that can run on different threads
    - More overhead but better for CPU-bound tasks
